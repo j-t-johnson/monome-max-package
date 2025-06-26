@@ -1,5 +1,6 @@
 inlets = 3; // second inlet: LED messages, third inlet: metro
 outlets = 12;
+autowatch = 1;
 
 var in_port;
 var prefix;
