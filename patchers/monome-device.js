@@ -247,11 +247,11 @@ function init() {
 }
 
 function rescan() {
-	outlet(1, "/serialosc/list", "localhost", in_port);
-	outlet(1, "/serialosc/notify", "localhost", in_port);
 	outlet(3, "clear");
 	outlet(3, "append", "none");
 	outlet(3, "textcolor", 1.0, 1.0, 1.0, 0.3);
+	outlet(1, "/serialosc/list", "localhost", in_port);
+	outlet(1, "/serialosc/notify", "localhost", in_port);
 	
 	ports = [];
 	devices = [];
@@ -298,8 +298,8 @@ function osc() {
 	else if(arguments[0] == "/sys/size") {
 		cols.push(arguments[1]);
 		rows.push(arguments[2]);
-		outlet(10, arguments[1]);
 		outlet(11, arguments[2]);
+		outlet(10, arguments[1]);
 	}
 	
 }
@@ -307,15 +307,14 @@ function osc() {
 
 function menu(i) {
 	if(i != 0) {
+		outlet(11, rows[i-1]);
+		outlet(10, cols[i-1]);
+		outlet(5, devices[i-1]);
+		outlet(4, serials[i-1]);
 		outlet(3, "textcolor", 1.0, 1.0, 1.0, 1.0);
 		outlet(2, "port", ports[i-1]);
 		outlet(2, "/sys/port", in_port);
 		outlet(2, "/sys/prefix", prefix);
-		
-		outlet(4, serials[i-1]);
-		outlet(5, devices[i-1]);
-		outlet(10, cols[i-1]);
-		outlet(11, rows[i-1]);
 		
 		autoconnect = 0;
 		connected = serials[i-1];
